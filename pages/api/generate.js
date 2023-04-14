@@ -10,17 +10,17 @@ export default async function (req, res) {
     res.status(500).json({
       error: {
         message:
-          "OpenAI API key not configured, please follow instructions in README.md",
+          "Chave da API invalida",
       },
     });
     return;
   }
 
-  const animal = req.body.animal || "";
-  if (animal.trim().length === 0) {
+  const palavra = req.body.palavra || "";
+  if (palavra.trim().length === 0) {
     res.status(400).json({
       error: {
-        message: "Please enter a valid animal",
+        message: "Por favor digite algo",
       },
     });
     return;
@@ -34,7 +34,7 @@ export default async function (req, res) {
       temperature: 0.6,
     });
     */
-    const completion = await generateDescription(animal)
+    const completion = await generateDescription(palavra)
 
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
